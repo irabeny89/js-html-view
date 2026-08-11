@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [0.2.1](https://github.com/irabeny89/js-html-view/compare/af8df3d4ae8e5ebd4d7f839db9f218d96c002952..0.2.1) - 2026-08-11
+#### Bug Fixes
+- adjust jsr type comment injection to keep shebang on line 1 - ([af8df3d](https://github.com/irabeny89/js-html-view/commit/af8df3d4ae8e5ebd4d7f839db9f218d96c002952)) - Irabeny
+
+- - -
+
 ## [0.2.0](https://github.com/irabeny89/js-html-view/compare/5147722be9f764336c6d7416179a91874ff005aa..0.2.0) - 2026-08-11
 #### Documentation
 - Merge branch 'main' of github.com:irabeny89/js-html-view - ([3bbefe2](https://github.com/irabeny89/js-html-view/commit/3bbefe224992823101d74a6205a6d6dd6cca113f)) - Irabeny
