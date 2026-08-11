@@ -12,17 +12,15 @@ skip_untracked = false
 pre_package_bump_hooks = []
 post_package_bump_hooks = []
 
-# This global list must stay up here
 pre_bump_hooks = [
-  "bun run build:js",
-  "sed -i 's/\"version\": \"'\"$current_version\"'\"/\"version\": \"'\"$next_version\"'\"/g' package.json",
-  "sed -i 's/\"version\": \"'\"$current_version\"'\"/\"version\": \"'\"$next_version\"'\"/g' jsr.json"
+  "bun build --target=node ./src/index.ts --outdir ./dist",
+  "sed -i 's/\"version\": \".*\"/\"version\": \"{{version}}\"/g' package.json",
+  "sed -i 's/\"version\": \".*\"/\"version\": \"{{version}}\"/g' jsr.json"
 ]
 
-# # If you uncomment these post-bump hooks later, style them like an array too:
 post_bump_hooks = [
   "git push origin main --tags",
-  "bun run publish"
+  "bunx jsr publish"
 ]
 
 # 2. Configuration Tables (Sections with bracketed headers)

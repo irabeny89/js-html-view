@@ -11,13 +11,15 @@ jobs:
 
     permissions:
       id-token: write
-      contents: write
+      contents: write  # Required to let the action push the tag and release commit
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          # Pass the token to checkout so downstream git operations are authorized
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -30,11 +32,6 @@ jobs:
       - name: Run Tests
         run: bun test
 
-      - name: Initialize Git User
-        run: |
-          git config --global user.name "gitHub-actions[bot]"
-          git config --global user.email "github-actions[bot]@no-reply.github.com"
-
       - name: Cocogitto Release
         uses: cocogitto/cocogitto-action@v3
         with:
@@ -42,3 +39,6 @@ jobs:
           release: true
           git-user: "github-actions[bot]"
           git-email: "github-actions[bot]@no-reply.github.com"
+        env:
+          # Passes auth through to your post_bump_hooks ("git push origin main --tags")
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
