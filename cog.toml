@@ -14,6 +14,8 @@ post_package_bump_hooks = []
 
 pre_bump_hooks = [
   "bun build --target=node ./src/index.ts --outdir ./dist",
+  "sed -i '1i /* @ts-self-types=\"./index.d.ts\" */' ./dist/index.js",
+  "echo 'export {};' > ./dist/index.d.ts",
   "sed -i 's/\"version\": \".*\"/\"version\": \"{{version}}\"/g' package.json",
   "sed -i 's/\"version\": \".*\"/\"version\": \"{{version}}\"/g' jsr.json"
 ]

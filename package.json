@@ -1,5 +1,6 @@
 {
   "name": "js-html-view",
+  "description": "A command-line utility powered by Bun to generate static HTML files from TypeScript/JavaScript template functions and preview them via a local HTTP server.",
   "author": {
     "name": "Ernest Irabor",
     "email": "irabeny89@gmail.com",

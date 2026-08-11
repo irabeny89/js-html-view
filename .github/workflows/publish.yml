@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           # Pass the token to checkout so downstream git operations are authorized
@@ -38,7 +38,7 @@ jobs:
           check: true
           release: true
           git-user: "github-actions[bot]"
-          git-email: "github-actions[bot]@no-reply.github.com"
+          git-user-email: "github-actions[bot]@no-reply.github.com"
         env:
           # Passes auth through to your post_bump_hooks ("git push origin main --tags")
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
