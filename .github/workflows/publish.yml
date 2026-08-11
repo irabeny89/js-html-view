@@ -1,0 +1,44 @@
+name: Auto-Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install Dependencies
+        run: bun install
+
+      - name: Run Tests
+        run: bun test
+
+      - name: Initialize Git User
+        run: |
+          git config --global user.name "gitHub-actions[bot]"
+          git config --global user.email "github-actions[bot]@no-reply.github.com"
+
+      - name: Cocogitto Release
+        uses: cocogitto/cocogitto-action@v3
+        with:
+          check: true
+          release: true
+          git-user: "github-actions[bot]"
+          git-email: "github-actions[bot]@no-reply.github.com"

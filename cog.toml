@@ -1,0 +1,39 @@
+project_id = "js-html-view"
+from_latest_tag = false
+ignore_merge_commits = false
+ignore_fixup_commits = true
+disable_changelog = false
+disable_bump_commit = false
+generate_mono_repository_global_tag = true
+generate_mono_repository_package_tags = true
+branch_whitelist = []
+skip_ci = "[skip ci]"
+skip_untracked = false
+pre_package_bump_hooks = []
+post_package_bump_hooks = []
+
+[git_hooks]
+pre-commit = "cog check --check-profile strict"
+
+[pre_bump_hooks]
+"build" = "bun run build:js"
+# update package.json version
+"version_package" = "sed -i 's/\"version\": \"'\"$current_version\"'\"/\"version\": \"'\"$next_version\"'\"/g' package.json"
+# update jsr.json version
+"version_jsr" = "sed -i 's/\"version\": \"'\"$current_version\"'\"/\"version\": \"'\"$next_version\"'\"/g' jsr.json"
+
+[post_bump_hooks]
+"push" = "git push origin main --tags"
+"publish_jsr" = "bun run publish"
+
+[commit_types]
+
+[changelog]
+path = "CHANGELOG.md"
+authors = [
+  { name = "Ernest Irabor", email = "irabeny89@gmail.com" }
+]
+
+[bump_profiles]
+
+[packages]
