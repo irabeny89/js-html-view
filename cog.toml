@@ -1,4 +1,4 @@
-project_id = "js-html-view"
+# 1. Global / Root-Level Settings (Must be first)
 from_latest_tag = false
 ignore_merge_commits = false
 ignore_fixup_commits = true
@@ -12,27 +12,37 @@ skip_untracked = false
 pre_package_bump_hooks = []
 post_package_bump_hooks = []
 
-[git_hooks]
-pre-commit = "cog check --check-profile strict"
+# This global list must stay up here
+pre_bump_hooks = [
+  "bun run build:js",
+  "sed -i 's/\"version\": \"'\"$current_version\"'\"/\"version\": \"'\"$next_version\"'\"/g' package.json",
+  "sed -i 's/\"version\": \"'\"$current_version\"'\"/\"version\": \"'\"$next_version\"'\"/g' jsr.json"
+]
 
-[pre_bump_hooks]
-"build" = "bun run build:js"
-# update package.json version
-"version_package" = "sed -i 's/\"version\": \"'\"$current_version\"'\"/\"version\": \"'\"$next_version\"'\"/g' package.json"
-# update jsr.json version
-"version_jsr" = "sed -i 's/\"version\": \"'\"$current_version\"'\"/\"version\": \"'\"$next_version\"'\"/g' jsr.json"
+# # If you uncomment these post-bump hooks later, style them like an array too:
+post_bump_hooks = [
+  "git push origin main --tags",
+  "bun run publish"
+]
 
-[post_bump_hooks]
-"push" = "git push origin main --tags"
-"publish_jsr" = "bun run publish"
+# 2. Configuration Tables (Sections with bracketed headers)
+[git_hooks.pre-commit]
+script = "cog check"
+
+[git_hooks.commit-msg]
+script = "cog verify --file $1"
 
 [commit_types]
 
 [changelog]
-path = "CHANGELOG.md"
 authors = [
-  { name = "Ernest Irabor", email = "irabeny89@gmail.com" }
+  { signature = "Ernest Irabor", username = "Irabeny" }
 ]
+path = "CHANGELOG.md"
+template = "remote"
+remote = "github.com"
+owner = "irabeny89"
+repository = "js-html-view"
 
 [bump_profiles]
 
