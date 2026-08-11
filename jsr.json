@@ -4,8 +4,9 @@
   "exports": "./dist/index.js",
   "publish": {
     "include": [
-      "dist/",
-      "README",
+      "dist/index.js",
+      "dist/index.d.ts",
+      "README.md",
       "LICENSE"
     ]
   }
