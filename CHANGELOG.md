@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [0.2.0](https://github.com/irabeny89/js-html-view/compare/5147722be9f764336c6d7416179a91874ff005aa..0.2.0) - 2026-08-11
+#### Documentation
+- Merge branch 'main' of github.com:irabeny89/js-html-view - ([3bbefe2](https://github.com/irabeny89/js-html-view/commit/3bbefe224992823101d74a6205a6d6dd6cca113f)) - Irabeny
+#### Features
+- trigger first automated package release - ([37130fb](https://github.com/irabeny89/js-html-view/commit/37130fbf03ca2722b60df7938f2f0ddf8adc98b8)) - Irabeny
+#### Miscellaneous Chores
+- update JSR publish include configuration for explicit file exports - ([4606363](https://github.com/irabeny89/js-html-view/commit/4606363e6063fc65facc926213c0a9ea46a58856)) - Irabeny
+- add project license, update metadata, refine build hooks, and upgrade publish workflow actions - ([5147722](https://github.com/irabeny89/js-html-view/commit/5147722be9f764336c6d7416179a91874ff005aa)) - Irabeny
+
+- - -
+
 ## [0.1.0](https://github.com/irabeny89/js-html-view/compare/b5df5b679e85cc0996b01179c061f74d9f3e4232..0.1.0) - 2026-08-11
 #### Continuous Integration
 - update release workflow authentication and refine versioning hooks in cog.toml - ([2eca025](https://github.com/irabeny89/js-html-view/commit/2eca02545621ccabe2aec3e93c612e4bf01dd9f1)) - Irabeny
