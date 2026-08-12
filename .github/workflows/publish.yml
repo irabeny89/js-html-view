@@ -42,6 +42,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Run your package build script so the dist/ folder actually exists
+      - name: Build Distribution Bundle
+        if: steps.coco.outputs.version != ''
+        run: bun run build:js
+
       # Archive the repository source code and dist folder into a lightweight tarball
       - name: Package Release Archive
         if: steps.coco.outputs.version != ''
@@ -69,11 +74,6 @@ jobs:
             checksum.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Run your package build script so the dist/ folder actually exists
-      - name: Build Distribution Bundle
-        if: steps.coco.outputs.version != ''
-        run: bun run build:js
 
       # Update Homebrew Tap with a Node dependency model
       - name: Update Homebrew Tap Formula
