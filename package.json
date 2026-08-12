@@ -8,7 +8,7 @@
   },
   "license": "MIT",
   "version": "0.3.0",
-  "module": "src/index.ts",
+  "main": "./dist/index.js",
   "type": "module",
   "bin": {
     "hv": "./dist/index.js"
@@ -22,13 +22,9 @@
     "test": "bun test",
     "version:next": "cog bump --dry-run --auto",
     "version:current": "cog get-version",
+    "version:pkg-update": "sed -i 's/\"version\": \".*\"/\"version\": \"{{version}}\"/g' package.json",
     "changelog": "./scripts/generate-changelog.sh",
-    "build": "bun build ./src/index.ts --compile --minify --sourcemap --outfile dist/hv",
-    "build:linux-x64": "bun build src/index.ts --compile --minify --sourcemap --outfile dist/hv-linux-x64 --target=bun-linux-x64",
-    "build:linux-arm64": "bun build src/index.ts --compile --minify --sourcemap --outfile dist/hv-linux-arm64 --target=bun-linux-arm64",
-    "build:macos-x64": "bun build src/index.ts --compile --minify --sourcemap --outfile dist/hv-darwin-x64 --target=bun-darwin-x64",
-    "build:macos-arm64": "bun build src/index.ts --compile --minify --sourcemap --outfile dist/hv-darwin-arm64 --target=bun-darwin-arm64",
-    "build:windows-x64": "bun build src/index.ts --compile --minify --sourcemap --outfile dist/hv-windows-x64.exe --target=bun-windows-x64",
+    "build:js": "bun build --target=node ./src/index.ts --outdir ./dist --banner '#!/usr/bin/env node'",
     "lint": "bunx tsc --noEmit",
     "link": "bun link",
     "unlink": "bun unlink"

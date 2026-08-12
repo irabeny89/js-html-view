@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-/* @ts-self-types="./index.d.ts" */
 /**
  * Generate html files from the email template functions in an input directory into an output directory.
  * 

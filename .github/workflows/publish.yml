@@ -42,73 +42,68 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Compile Standalone Binaries
+      # Archive the repository source code and dist folder into a lightweight tarball
+      - name: Package Release Archive
+        if: steps.coco.outputs.version != ''
         run: |
-          bun run build:linux-x64
-          bun run build:linux-arm64
-          bun run build:macos-x64
-          bun run build:macos-arm64
-          bun run build:windows-x64
+          VERSION="${{ steps.coco.outputs.version }}"
+          tar -czf "js-html-view-${VERSION}.tar.gz" dist/ package.json README.md LICENSE
 
-      - name: Generate SHA256 Checksums
+      # Calculate SHA256 checksum for the single archive
+      - name: Generate Checksum
+        if: steps.coco.outputs.version != ''
+        id: hash
         run: |
-          cd dist
-          sha256sum hv-linux-x64 hv-linux-arm64 hv-darwin-x64 hv-darwin-arm64 hv-windows-x64.exe > checksums.txt
-          cat checksums.txt
+          VERSION="${{ steps.coco.outputs.version }}"
+          ARCHIVE_NAME="js-html-view-${VERSION}.tar.gz"
+          SHA=$(sha256sum "$ARCHIVE_NAME" | awk '{print $1}')
+          echo "sha=$SHA" >> $GITHUB_OUTPUT
+          echo "$SHA" > checksum.txt
 
-      - name: Upload Binaries to GitHub Release
+      - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.coco.outputs.version }}
           files: |
-            dist/hv-linux-x64
-            dist/hv-linux-arm64
-            dist/hv-darwin-x64
-            dist/hv-darwin-arm64
-            dist/hv-windows-x64.exe
-            dist/checksums.txt
+            js-html-view-${{ steps.coco.outputs.version }}.tar.gz
+            checksum.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # ✅ AUTOMATION STEP: Updates your Homebrew Tap repository on every new tag
+      # Update Homebrew Tap with a Node dependency model
       - name: Update Homebrew Tap Formula
-        if: steps.coco.outputs.version != '' # Only runs if a new version was actually created
+        if: steps.coco.outputs.version != ''
         run: |
           VERSION="${{ steps.coco.outputs.version }}"
-          
-          # Calculate individual SHA256 hashes specifically for the macOS binaries
-          SHA_INTEL=$(sha256sum dist/hv-darwin-x64 | awk '{print $1}')
-          SHA_ARM=$(sha256sum dist/hv-darwin-arm64 | awk '{print $1}')
-          
+          SHA="${{ steps.hash.outputs.sha }}"
+
           # Configure Git inside runner context
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@no-reply.github.com"
-          
+
           # Clone your homebrew-tap repository using your personal access token secret
           git clone https://x-access-token:${{ secrets.TAP_TOKEN }}@github.com/irabeny89/homebrew-tap homebrew-repo
-          
+
           # Generate a multi-platform Homebrew ruby formula file dynamically
           cat << EOF > homebrew-repo/hv.rb
           class Hv < Formula
             desc "A CLI to generate static HTML from JS/TS template functions and preview them."
             homepage "https://github.com/irabeny89/js-html-view"
             version "${VERSION}"
-          
-            if Hardware::CPU.arm?
-              url "https://github.com/irabeny89/js-html-view/releases/download/#{version}/hv-darwin-arm64"
-              sha256 "${SHA_ARM}"
-            else
-              url "https://github.com/irabeny89/js-html-view/releases/download/#{version}/hv-darwin-x64"
-              sha256 "${SHA_INTEL}"
-            end
-          
+
+            url "https://github.com/irabeny89/js-html-view/releases/download/#{version}/js-html-view-#{version}.tar.gz"
+            sha256 "${SHA}"
+
+            # Tells Homebrew to ensure Node.js is installed on the user's system
+            depends_on "node"
+
             def install
-              # Rename the platform binary to standard "hv" on installation
-              if Hardware::CPU.arm?
-                bin.install "hv-darwin-arm64" => "hv"
-              else
-                bin.install "hv-darwin-x64" => "hv"
-              end
+              # Copy all library assets into homebrew's internal cellar path
+              libexec.install Dir["*"]
+
+              # Automatically write an executable symlink wrapper that fires up Node.js
+              # This mounts an ultra-light "hv" command globally that calls your script!
+              bin.install_symlink libexec/"dist/index.js" => "hv"
             end
           
             test do
@@ -116,9 +111,9 @@ jobs:
             end
           end
           EOF
-          
+
           # Commit and push changes over to the homebrew-tap repository automatically
           cd homebrew-repo
           git add hv.rb
-          git commit -m "chore: bump hv formula to version ${VERSION}"
+          git commit -m "chore: bump hv formula to script version ${VERSION}"
           git push origin main
