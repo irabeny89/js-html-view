@@ -2,6 +2,9 @@
 
 A command-line utility powered by Bun to generate static HTML files from TypeScript/JavaScript template functions and preview them via a local HTTP server.
 
+[![GitHub Release](https://shields.io)](https://github.com)
+[![License: MIT](https://shields.io)](LICENSE)
+
 ## Features
 
 - **HTML Generation**: Execute exported template functions and save rendered HTML directly to a designated output directory.
@@ -13,28 +16,43 @@ A command-line utility powered by Bun to generate static HTML files from TypeScr
 
 ## Installation
 
-Ensure you have [Bun](https://bun.sh) installed.
+You can install and manage `js-html-view` using either Homebrew or a direct binary download.
 
+### 1. Via Homebrew (Recommended for macOS & Linux)
+Add the custom repository tap and install the binary globally:
 ```bash
-bun install
+brew tap irabeny89/tap
+brew install hv
+```
+
+### 2. Direct Binary Download (cURL)
+Fetch the compiled standalone native binary directly from the latest automated GitHub Release:
+```bash
+# Example for a Mac with Apple Silicon (M1/M2/M3)
+curl -L https://github.com/latest/download/hv-darwin-arm64 -o /usr/local/bin/hv && chmod +x /usr/local/bin/hv
+
+# Example for Linux (x86_64)
+curl -L https://github.com/latest/download/hv-linux-x64 -o /usr/local/bin/hv && chmod +x /usr/local/bin/hv
 ```
 
 ---
 
 ## Usage
 
+Once installed globally, you can invoke the utility anywhere using the **`hv`** terminal command entrypoint.
+
 ### 1. Positional Arguments
 
-Pass input directory/file, output directory, function name, function arguments, and an optional port number:
+Pass input directory/file, output directory, function name, function arguments, and an optional port number sequentially:
 
 ```bash
-bun index.ts [inDir] [outDir] [funcName] [arg1] [arg2] ... [argN] [port]
+hv [inDir] [outDir] [funcName] [arg1] [arg2] ... [argN] [port]
 ```
 
 **Example:**
 
 ```bash
-bun index.ts src/templates/email.ts dist/emails otpEmail 123456 2026-12-31 3333
+hv src/templates/email.ts dist/emails otpEmail 123456 2026-12-31 3333
 ```
 
 This generates `dist/emails/otpEmail.html` and starts a preview server at `http://localhost:3333`.
@@ -43,10 +61,10 @@ This generates `dist/emails/otpEmail.html` and starts a preview server at `http:
 
 ### 2. Option Flags
 
-You can also use flag options to specify parameters:
+You can use explicit option flags to configure execution parameters dynamically:
 
 ```bash
-bun index.ts -i src/templates/email.ts -o dist/emails -f otpEmail -a 123456 -a 2026-12-31 -p 3333
+hv -i src/templates/email.ts -o dist/emails -f otpEmail -a 123456 -a 2026-12-31 -p 3333
 ```
 
 #### Available Flags
@@ -65,17 +83,17 @@ bun index.ts -i src/templates/email.ts -o dist/emails -f otpEmail -a 123456 -a 2
 
 ### 3. List Exported Functions
 
-Inspect available template functions and their required arguments:
+Inspect and print out all available templates inside a file along with their required parameter signatures:
 
 ```bash
-bun index.ts src/templates/email.ts -l
+hv src/templates/email.ts -l
 ```
 
 ---
 
 ### 4. Writing Template Functions
 
-Create a file (e.g. `templates.ts`) that exports email template functions returning an HTML string:
+Create a source file (e.g., `templates.ts`) that exports email template functions returning an HTML string payload:
 
 ```ts
 export function welcomeEmail(name: string, role: string) {
@@ -96,8 +114,8 @@ export function welcomeEmail(name: string, role: string) {
 
 ## Running Tests
 
-Run the test suite using Bun:
+Execute the automated test suite locally using the Bun runtime:
 
 ```bash
-bun run test
+bun test
 ```

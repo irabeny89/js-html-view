@@ -13,16 +13,11 @@ pre_package_bump_hooks = []
 post_package_bump_hooks = []
 
 pre_bump_hooks = [
-  "bun build --target=node ./src/index.ts --outdir ./dist",
-  "sed -i '2i /* @ts-self-types=\"./index.d.ts\" */' ./dist/index.js",
-  "echo 'export {};' > ./dist/index.d.ts",
-  "sed -i 's/\"version\": \".*\"/\"version\": \"{{version}}\"/g' package.json",
-  "sed -i 's/\"version\": \".*\"/\"version\": \"{{version}}\"/g' jsr.json"
+  "sed -i 's/\"version\": \".*\"/\"version\": \"{{version}}\"/g' package.json"
 ]
 
 post_bump_hooks = [
-  "git push origin main --tags",
-  "bunx jsr publish"
+  "git push origin main --tags"
 ]
 
 # 2. Configuration Tables (Sections with bracketed headers)
