@@ -22,7 +22,7 @@
     "test": "bun test",
     "version:next": "cog bump --dry-run --auto",
     "version:current": "cog get-version",
-    "version:pkg-update": "sed -i '' 's/\"version\": \".*\"/\"version\": \"'\"$(cog get-version)\"'\"/g' package.json",
+    "version:pkg-update": "sed -i '' 's/\"version\": \".*\"/\"version\": \"'\"$(bun version:next)\"'\"/g' package.json",
     "changelog": "./scripts/generate-changelog.sh",
     "build:js": "bun build --target=node ./src/index.ts --outdir ./dist --banner '#!/usr/bin/env node'",
     "lint": "bunx tsc --noEmit",
