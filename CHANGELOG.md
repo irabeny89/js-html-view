@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [0.5.0](https://github.com/irabeny89/js-html-view/compare/b4bf25505092ab25f529cbee0f8b2e8f782ae8cc..0.5.0) - 2026-08-12
+#### Features
+- include conventional commits log in GitHub release body - ([b4bf255](https://github.com/irabeny89/js-html-view/commit/b4bf25505092ab25f529cbee0f8b2e8f782ae8cc)) - Irabeny
+
+- - -
+
 ## [0.4.0](https://github.com/irabeny89/js-html-view/compare/f7552dca62745e0ba9160c5946e00fd9148e15d6..0.4.0) - 2026-08-12
 #### Build system
 - run build script before updating Homebrew formula in publish workflow - ([26f454d](https://github.com/irabeny89/js-html-view/commit/26f454da4db925239c892317ea23199bd7be0aba)) - Irabeny
