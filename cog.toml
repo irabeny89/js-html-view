@@ -15,7 +15,7 @@ post_package_bump_hooks = []
 
 pre_bump_hooks = [
   "bun build:js",
-  "sed -i '' 's/\"version\": \".*\"/\"version\": \"'\"{{version}}\"'\"/g' package.json"
+  "sed -i 's/\"version\": \".*\"/\"version\": \"{{version}}\"/g' package.json"
 ]
 
 post_bump_hooks = [
