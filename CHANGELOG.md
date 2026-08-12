@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [0.3.0](https://github.com/irabeny89/js-html-view/compare/6ea84fef6502bf2dacf21727c95be505ea9ea599..0.3.0) - 2026-08-12
+#### Features
+- complete end-to-end binary compilation and homebrew tap automation - ([6ea84fe](https://github.com/irabeny89/js-html-view/commit/6ea84fef6502bf2dacf21727c95be505ea9ea599)) - Irabeny
+#### Refactoring
+- remove JSR support, simplify build scripts, and update documentation for binary distribution - ([c32dfbd](https://github.com/irabeny89/js-html-view/commit/c32dfbd9558dd607221e1cfa163ab400f2b91ff2)) - Irabeny
+
+- - -
+
 ## [0.2.1](https://github.com/irabeny89/js-html-view/compare/af8df3d4ae8e5ebd4d7f839db9f218d96c002952..0.2.1) - 2026-08-11
 #### Bug Fixes
 - adjust jsr type comment injection to keep shebang on line 1 - ([af8df3d](https://github.com/irabeny89/js-html-view/commit/af8df3d4ae8e5ebd4d7f839db9f218d96c002952)) - Irabeny
