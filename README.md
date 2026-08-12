@@ -19,20 +19,12 @@ A command-line utility powered by Bun to generate static HTML files from TypeScr
 You can install and manage `js-html-view` using either Homebrew or a direct binary download.
 
 ### 1. Via Homebrew (Recommended for macOS & Linux)
+
 Add the custom repository tap and install the binary globally:
+
 ```bash
 brew tap irabeny89/tap
 brew install hv
-```
-
-### 2. Direct Binary Download (cURL)
-Fetch the compiled standalone native binary directly from the latest automated GitHub Release:
-```bash
-# Example for a Mac with Apple Silicon (M1/M2/M3)
-curl -L https://github.com/latest/download/hv-darwin-arm64 -o /usr/local/bin/hv && chmod +x /usr/local/bin/hv
-
-# Example for Linux (x86_64)
-curl -L https://github.com/latest/download/hv-linux-x64 -o /usr/local/bin/hv && chmod +x /usr/local/bin/hv
 ```
 
 ---
