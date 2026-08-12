@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [0.6.0](https://github.com/irabeny89/js-html-view/compare/2841f9509bd91567e44cf33399faa5d622531ce6..0.6.0) - 2026-08-12
+#### Features
+- generate and use detailed changelog file for GitHub release body - ([2841f95](https://github.com/irabeny89/js-html-view/commit/2841f9509bd91567e44cf33399faa5d622531ce6)) - Irabeny
+
+- - -
+
 ## [0.5.0](https://github.com/irabeny89/js-html-view/compare/b4bf25505092ab25f529cbee0f8b2e8f782ae8cc..0.5.0) - 2026-08-12
 #### Features
 - include conventional commits log in GitHub release body - ([b4bf255](https://github.com/irabeny89/js-html-view/commit/b4bf25505092ab25f529cbee0f8b2e8f782ae8cc)) - Irabeny
