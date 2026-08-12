@@ -13,8 +13,8 @@ pre_package_bump_hooks = []
 post_package_bump_hooks = []
 
 pre_bump_hooks = [
-  "bun run build:js",
-  "bun run version:pkg-update"
+  "bun build:js",
+  "bun version:pkg-update"
 ]
 
 post_bump_hooks = [
