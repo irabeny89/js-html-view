@@ -7,7 +7,7 @@
     "url": "https://irabeny89.github.io/portfolio"
   },
   "license": "MIT",
-  "version": "0.3.0",
+  "version": "{{version}}",
   "main": "./dist/index.js",
   "type": "module",
   "bin": {

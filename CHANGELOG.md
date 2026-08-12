@@ -2,6 +2,21 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [0.4.0](https://github.com/irabeny89/js-html-view/compare/f7552dca62745e0ba9160c5946e00fd9148e15d6..0.4.0) - 2026-08-12
+#### Build system
+- run build script before updating Homebrew formula in publish workflow - ([26f454d](https://github.com/irabeny89/js-html-view/commit/26f454da4db925239c892317ea23199bd7be0aba)) - Irabeny
+#### Documentation
+- remove manual cURL installation instructions from README - ([733c783](https://github.com/irabeny89/js-html-view/commit/733c7835728e7b3fe28c0f3fdbf497e4b19a4cd4)) - Irabeny
+#### Features
+- add shell-based installation/uninstallation scripts and implement auto-update notifications in CLI - ([df6a366](https://github.com/irabeny89/js-html-view/commit/df6a366f75e7a54b050feeb4651b188ab437ccd6)) - Irabeny
+#### Miscellaneous Chores
+- bump softprops/action-gh-release to v3 in publish workflow - ([7ce62da](https://github.com/irabeny89/js-html-view/commit/7ce62daefdf0341891aebf74abf97e1457a3da5d)) - Irabeny
+- move build step before packaging in publish workflow - ([1df01bd](https://github.com/irabeny89/js-html-view/commit/1df01bd3cba38e60b8fb9a79d5303188c5ce4a6c)) - Irabeny
+#### Refactoring
+- transition from compiled binaries to a Node.js-based distribution model with release archiving - ([f7552dc](https://github.com/irabeny89/js-html-view/commit/f7552dca62745e0ba9160c5946e00fd9148e15d6)) - Irabeny
+
+- - -
+
 ## [0.3.0](https://github.com/irabeny89/js-html-view/compare/6ea84fef6502bf2dacf21727c95be505ea9ea599..0.3.0) - 2026-08-12
 #### Features
 - complete end-to-end binary compilation and homebrew tap automation - ([6ea84fe](https://github.com/irabeny89/js-html-view/commit/6ea84fef6502bf2dacf21727c95be505ea9ea599)) - Irabeny
