@@ -12,6 +12,7 @@ import { writeFile, mkdir } from "fs/promises";
 import { join } from "node:path";
 import { parseArgs } from "node:util";
 import { createServer } from "http"
+import { version as currentVersion } from "../package.json";
 
 const isDebugMode = process.env.DEBUG === "TRUE" || process.env.DEBUG === "true" || process.env.DEBUG === "1"
 
@@ -20,30 +21,40 @@ const debugLog = (...args: unknown[]) => {
   console.debug(`[${new Date().toISOString()}]: `, ...args)
 }
 
-const { values, positionals } = parseArgs({
-  options: {
-    outDir: { type: "string", short: "o" },
-    inDir: { type: "string", short: "i" },
-    //? name of the template function: --funcName or -f 
-    funcName: { type: "string", short: "f" },
-    //? args to be passed to the template function: --args or -a
-    args: { type: "string", short: "a", multiple: true },
-    port: { type: "string", short: "p" },
-    //? boolean flags are always in values even when used in positionals
-    //? print help: --help or -h */
-    help: { type: "boolean", short: "h" },
-    list: { type: "boolean", short: "l" },
-  },
-  allowPositionals: true
-});
+/**
+ * Checks GitHub for a newer version of the CLI utility and notifies the user.
+ */
+async function checkForUpdates(): Promise<void> {
+  const repo = "irabeny89/js-html-view";
+  const apiUrl = `https://api.github.com/repos/${repo}/releases/latest`;
 
-if (values.help) {
-  printHelp();
-  process.exit(0);
-}
-if (values.list) {
-  listFunctions(values, positionals);
-  process.exit(0);
+  try {
+    // Set a short timeout using AbortController so it doesn't slow down the CLI if the user is offline
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 1500);
+
+    const response = await fetch(apiUrl, {
+      signal: controller.signal,
+      headers: { "User-Agent": "js-html-view-cli" } // GitHub API requires a User-Agent header
+    });
+    
+    clearTimeout(timeoutId);
+
+    if (!response.ok) return;
+
+    const data = (await response.json()) as { tag_name: string };
+    const latestVersion = data.tag_name.replace(/^v/, ""); // Strip leading 'v' if present
+
+    if (latestVersion !== currentVersion) {
+      console.log("\n\x1b[34m%s\x1b[0m", "====================================================");
+      console.log(`\x1b[33mUpdate available!\x1b[0m \x1b[2m(${currentVersion} → ${latestVersion})\x1b[0m`);
+      console.log("Run the installer again to pull the latest features:");
+      console.log(`\x1b[32mcurl -fsSL https://githubusercontent.com{repo}/main/install.sh | bash\x1b[0m`);
+      console.log("\x1b[34m%s\x1b[0m", "====================================================\n");
+    }
+  } catch {
+    // Silently catch network errors or timeouts so the CLI works flawlessly offline
+  }
 }
 
 const checkRequiredPositionalArgs = (val: typeof values) => {
@@ -155,7 +166,34 @@ function printHelp() {
   console.info("\tExample: -f otpEmail -a 123456 -a 2026-12-31 -o generated/emailTemplate -i src/utils/emailTemplate -p 3333")
 }
 
+const { values, positionals } = parseArgs({
+  options: {
+    outDir: { type: "string", short: "o" },
+    inDir: { type: "string", short: "i" },
+    //? name of the template function: --funcName or -f 
+    funcName: { type: "string", short: "f" },
+    //? args to be passed to the template function: --args or -a
+    args: { type: "string", short: "a", multiple: true },
+    port: { type: "string", short: "p" },
+    //? boolean flags are always in values even when used in positionals
+    //? print help: --help or -h */
+    help: { type: "boolean", short: "h" },
+    list: { type: "boolean", short: "l" },
+  },
+  allowPositionals: true
+});
+
+if (values.help) {
+  printHelp();
+  process.exit(0);
+}
+if (values.list) {
+  listFunctions(values, positionals);
+  process.exit(0);
+}
+
 try {
+  await checkForUpdates()
   const { outDir, inDir, funcName, args, port } = resolveValues(values, positionals)
   debugLog({ positionals, values, inDir, outDir, funcName, args, port })
   //? Invoke the template function with parsed arguments

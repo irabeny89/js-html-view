@@ -27,6 +27,33 @@ brew tap irabeny89/tap
 brew install hv
 ```
 
+### 2. Via Curl and Shell Script
+
+This approach works on both **macOS** and **Linux**. The script automatically detects your system and installs the appropriate binary.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/irabeny89/js-html-view/main/install.sh | bash
+```
+
+---
+
+## Uninstallation
+
+### If installed via Homebrew
+
+```bash
+brew uninstall hv
+brew untap irabeny89/tap
+```
+
+### If installed via the Script Installer
+
+You can run the official uninstallation script to completely remove all application directories and global shortcuts from your machine:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/irabeny89/js-html-view/main/uninstall.sh | bash
+```
+
 ---
 
 ## Usage
