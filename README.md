@@ -97,6 +97,9 @@ hv -i src/templates/email.ts -o dist/emails -f otpEmail -a 123456 -a 2026-12-31 
 | `--port` | `-p` | Port number to serve the generated HTML preview server |
 | `--list` | `-l` | List all available exported functions and their parameters |
 | `--help` | `-h` | Print help and usage instructions |
+| `--version` | `-v` | Print the current version of the CLI utility |
+| `--update` | `-up` | Update the CLI utility |
+| `--remove` | `-rm` | Remove the CLI utility |
 
 ---
 
@@ -127,6 +130,39 @@ export function welcomeEmail(name: string, role: string) {
 </body>
 </html>`;
 }
+```
+
+---
+
+### 5. Update CLI
+
+Update the CLI utility to the latest version:
+
+```bash
+hv --update
+hv -up
+```
+
+---
+
+### 6. Uninstall CLI
+
+Uninstall the CLI utility from your system:
+
+```bash
+hv --remove
+hv -rm
+```
+
+---
+
+### 7. Get Current Version
+
+Get the current version of the CLI utility:
+
+```bash
+hv --version
+hv -v
 ```
 
 ---
