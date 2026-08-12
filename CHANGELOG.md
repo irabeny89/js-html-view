@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [0.7.0](https://github.com/irabeny89/js-html-view/compare/497ffa31709ea3e0783c6448262ccbb69864bfa8..0.7.0) - 2026-08-12
+#### Features
+- update CLI flags, improve debug logging, move scripts, and finalize versioning - ([b0816a0](https://github.com/irabeny89/js-html-view/commit/b0816a07a3db043b7dfa41997b108f2465be47ec)) - Irabeny
+- add version, update, and uninstall CLI commands with refactored logic in utility modules - ([497ffa3](https://github.com/irabeny89/js-html-view/commit/497ffa31709ea3e0783c6448262ccbb69864bfa8)) - Irabeny
+
+- - -
+
 ## [0.6.0](https://github.com/irabeny89/js-html-view/compare/2841f9509bd91567e44cf33399faa5d622531ce6..0.6.0) - 2026-08-12
 #### Features
 - generate and use detailed changelog file for GitHub release body - ([2841f95](https://github.com/irabeny89/js-html-view/commit/2841f9509bd91567e44cf33399faa5d622531ce6)) - Irabeny
