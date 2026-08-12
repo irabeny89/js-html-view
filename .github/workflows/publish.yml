@@ -69,6 +69,8 @@ jobs:
         uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.coco.outputs.version }}
+          # Automatically applies the conventional commits log as the release description body
+          body: ${{ steps.coco.outputs.stdout }}
           files: |
             js-html-view-${{ steps.coco.outputs.version }}.tar.gz
             checksum.txt
