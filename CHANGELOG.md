@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [0.7.1](https://github.com/irabeny89/js-html-view/compare/2d41005a68bd8cd4be765727f2c7490e017536c3..0.7.1) - 2026-08-12
+#### Bug Fixes
+- simplify sed command for package.json version updates in cog.toml - ([79bb1c2](https://github.com/irabeny89/js-html-view/commit/79bb1c2b5e43121e9a5f92e64e11683601f350d3)) - Irabeny
+- streamline version bumping by updating cog.toml hooks and removing redundant package.json script - ([3c803b5](https://github.com/irabeny89/js-html-view/commit/3c803b5f1bfa5ba3cbbe994087dae656ae1718c0)) - Irabeny
+- update version:pkg-update script to use bun version:next instead of cog get-version to fix version update on package.json - ([2c4e52b](https://github.com/irabeny89/js-html-view/commit/2c4e52b768aac16fb4a919e7f122e3d9a0d95857)) - Irabeny
+- update pre-bump hook commands in cog.toml to use bun run-less syntax and fix command to update package.json version - ([37af169](https://github.com/irabeny89/js-html-view/commit/37af169219ee980403c1328dd77be2f4b1bdaba3)) - Irabeny
+#### Miscellaneous Chores
+- hardcode version 0.7.0 and fix sed command in version:pkg-update script - ([2d41005](https://github.com/irabeny89/js-html-view/commit/2d41005a68bd8cd4be765727f2c7490e017536c3)) - Irabeny
+
+- - -
+
 ## [0.7.0](https://github.com/irabeny89/js-html-view/compare/497ffa31709ea3e0783c6448262ccbb69864bfa8..0.7.0) - 2026-08-12
 #### Features
 - update CLI flags, improve debug logging, move scripts, and finalize versioning - ([b0816a0](https://github.com/irabeny89/js-html-view/commit/b0816a07a3db043b7dfa41997b108f2465be47ec)) - Irabeny
