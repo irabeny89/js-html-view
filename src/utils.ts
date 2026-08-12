@@ -4,8 +4,8 @@ import type { ParsedArgsValueT } from "./types";
 import { join } from "node:path";
 
 const REPO = "irabeny89/js-html-view";
-const INSTALL_SCRIPT_URL = `https://raw.githubusercontent.com/${REPO}/main/install.sh`;
-const UNINSTALL_SCRIPT_URL = `https://raw.githubusercontent.com/${REPO}/main/uninstall.sh`;
+const INSTALL_SCRIPT_URL = `https://raw.githubusercontent.com/${REPO}/main/scripts/install.sh`;
+const UNINSTALL_SCRIPT_URL = `https://raw.githubusercontent.com/${REPO}/main/scripts/uninstall.sh`;
 const LATEST_RELEASE_URL = `https://api.github.com/repos/${REPO}/releases/latest`
 
 /**
@@ -32,8 +32,10 @@ export async function checkForUpdates(): Promise<void> {
     if (latestVersion !== currentVersion) {
       console.log("\n\x1b[34m%s\x1b[0m", "====================================================");
       console.log(`\x1b[33mUpdate available!\x1b[0m \x1b[2m(${currentVersion} → ${latestVersion})\x1b[0m`);
-      console.log("Run the installer again to pull the latest features:");
+      console.log("If installed with the install script, run:")
       console.log(`\x1b[32mcurl -fsSL ${INSTALL_SCRIPT_URL} | bash\x1b[0m`);
+      console.log(`Or if installed with Homebrew, run:`)  
+      console.log(`\x1b[32mbrew update && brew upgrade js-html-view\x1b[0m`);  
       console.log("\x1b[34m%s\x1b[0m", "====================================================\n");
     }
   } catch {
@@ -144,8 +146,8 @@ export function help() {
   console.info("\t-a | --args: Arguments to pass to the function")
   console.info("\t-o | --outDir: Directory to save the generated html file")
   console.info("\t-i | --inDir: Directory containing the function to generate html from")
-  console.info("\t-up | --update: Update the CLI utility")
-  console.info("\t-rm | --remove: Remove the CLI utility")
+  console.info("\t-u | --update: Update the CLI utility")
+  console.info("\t-r | --remove: Remove the CLI utility")
   console.info("\t-v | --version: Print the current version of the CLI utility")
   console.info("\t-p | --port: Port to serve the generated html file on")
 

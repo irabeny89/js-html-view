@@ -32,7 +32,7 @@ brew install hv
 This approach works on both **macOS** and **Linux**. The script automatically detects your system and installs the appropriate binary.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/irabeny89/js-html-view/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/irabeny89/js-html-view/main/scripts/install.sh | bash
 ```
 
 ---
@@ -51,7 +51,7 @@ brew untap irabeny89/tap
 You can run the official uninstallation script to completely remove all application directories and global shortcuts from your machine:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/irabeny89/js-html-view/main/uninstall.sh | bash
+curl -fsSL https://raw.githubusercontent.com/irabeny89/js-html-view/main/scripts/uninstall.sh | bash
 ```
 
 ---
@@ -98,8 +98,8 @@ hv -i src/templates/email.ts -o dist/emails -f otpEmail -a 123456 -a 2026-12-31 
 | `--list` | `-l` | List all available exported functions and their parameters |
 | `--help` | `-h` | Print help and usage instructions |
 | `--version` | `-v` | Print the current version of the CLI utility |
-| `--update` | `-up` | Update the CLI utility |
-| `--remove` | `-rm` | Remove the CLI utility |
+| `--update` | `-u` | Update the CLI utility |
+| `--remove` | `-r` | Remove the CLI utility |
 
 ---
 
@@ -140,7 +140,7 @@ Update the CLI utility to the latest version:
 
 ```bash
 hv --update
-hv -up
+hv -u
 ```
 
 ---
@@ -151,7 +151,7 @@ Uninstall the CLI utility from your system:
 
 ```bash
 hv --remove
-hv -rm
+hv -r
 ```
 
 ---

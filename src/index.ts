@@ -17,7 +17,11 @@ import { help, list, checkForUpdates, resolveValues, version, update, uninstall 
 const isDebugMode = process.env.DEBUG === "TRUE" || process.env.DEBUG === "true" || process.env.DEBUG === "1"
 const debugLog = (...args: unknown[]) => {
   if (!isDebugMode) return
-  console.debug(`[${new Date().toISOString()}]: `, ...args)
+  const jsonArgs = []
+  for (const arg of args) {
+    jsonArgs.push(JSON.stringify(arg, null, 2))
+  }
+  console.log(jsonArgs.join("\n"))
 }
 
 const { values, positionals } = parseArgs({
@@ -34,8 +38,8 @@ const { values, positionals } = parseArgs({
     help: { type: "boolean", short: "h" },
     list: { type: "boolean", short: "l" },
     version: { type: "boolean", short: "v" },
-    update: { type: "boolean", short: "up" },
-    remove: { type: "boolean", short: "rm" },
+    update: { type: "boolean", short: "u" },
+    remove: { type: "boolean", short: "r" },
   },
   allowPositionals: true
 });
