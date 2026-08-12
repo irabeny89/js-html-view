@@ -65,12 +65,14 @@ jobs:
           echo "sha=$SHA" >> $GITHUB_OUTPUT
           echo "$SHA" > checksum.txt
 
+      - name: Generate Github Release Changelog
+        run: cog changelog --at ${{ steps.coco.outputs.version }} -t full_hash > GITHUB_CHANGELOG.md
+
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.coco.outputs.version }}
-          # Automatically applies the conventional commits log as the release description body
-          body: ${{ steps.coco.outputs.stdout }}
+          body_path: GITHUB_CHANGELOG.md
           files: |
             js-html-view-${{ steps.coco.outputs.version }}.tar.gz
             checksum.txt
